@@ -11,21 +11,29 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         [SerializeField]
         GameObject m_Prefab;
-
+        public GameObject middlePrefab;
+        public int numberOfAnchors;
         public GameObject prefab
         {
             get => m_Prefab;
             set => m_Prefab = value;
         }
 
-        public void RemoveAllAnchors()
+        public void CalibrateMiddle()
         {
             Logger.Log($"Removing all anchors ({m_Anchors.Count})");
-            foreach (var anchor in m_Anchors)
-            {
-                Destroy(anchor.gameObject);
-            }
-            m_Anchors.Clear();
+            var centroid = new Vector3(0, 0, 0);
+            var numPoints = m_Anchors.Count;
+                foreach (var anchor in m_Anchors)
+                {
+                    centroid += anchor.transform.position;
+                }
+
+                centroid /= numPoints;
+
+            Instantiate(middlePrefab, centroid, Quaternion.identity);
+            
+           
         }
 
         protected override void Awake()
@@ -121,6 +129,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     // Remember the anchor so we can remove it later.
                     m_Anchors.Add(anchor);
+                    Debug.Log(m_Anchors.Count);
+                    if (m_Anchors.Count == numberOfAnchors) CalibrateMiddle();
                 }
                 else
                 {
