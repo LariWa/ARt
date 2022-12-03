@@ -12,7 +12,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         GameObject m_Prefab;
         public GameObject middlePrefab;
-        public int numberOfAnchors;
+        public Transform drawingOrigin;
+
         public GameObject prefab
         {
             get => m_Prefab;
@@ -21,20 +22,41 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void CalibrateMiddle()
         {
-            Logger.Log($"Removing all anchors ({m_Anchors.Count})");
             var centroid = new Vector3(0, 0, 0);
             var numPoints = m_Anchors.Count;
-                foreach (var anchor in m_Anchors)
-                {
-                    centroid += anchor.transform.position;
-                }
+            foreach (var anchor in m_Anchors)
+            {
+                centroid += anchor.transform.position;
+            }
 
-                centroid /= numPoints;
+            centroid /= numPoints;
+            centroid = new Vector3(centroid.x, Camera.main.transform.position.y, centroid.z);
 
-            Instantiate(middlePrefab, centroid, Quaternion.identity);
-            
-           
+            drawingOrigin = Instantiate(middlePrefab, centroid, Quaternion.identity).transform;
+            setTrackingVisibility(false);
         }
+
+        public void Reset()
+        {
+            Debug.Log("reset");
+            foreach (var anchor in m_Anchors)
+            {
+                Destroy(anchor.gameObject);
+            }
+            m_Anchors.Clear();
+            Destroy(drawingOrigin.gameObject);
+            setTrackingVisibility(true);
+        }
+        void setTrackingVisibility(bool visible)
+        {
+            var arPlaneManager = this.GetComponent<ARPlaneManager>();
+            arPlaneManager.SetTrackablesActive(visible);
+            arPlaneManager.planePrefab.SetActive(visible);
+            var arPointCloudManager = this.GetComponent<ARPointCloudManager>();
+            arPointCloudManager.SetTrackablesActive(visible);
+            arPointCloudManager.pointCloudPrefab.SetActive(visible);
+        }
+
 
         protected override void Awake()
         {
@@ -112,29 +134,31 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         protected override void OnPress(Vector3 position)
         {
-            // Raycast against planes and feature points
-            const TrackableType trackableTypes =
-                TrackableType.FeaturePoint |
-                TrackableType.PlaneWithinPolygon;
+            if (position.y > 240)
+            { //otherwise the calibrate btn is pressed
 
-            // Perform the raycast
-            if (m_RaycastManager.Raycast(position, s_Hits, trackableTypes))
-            {
-                // Raycast hits are sorted by distance, so the first one will be the closest hit.
-                var hit = s_Hits[0];
+                // Raycast against planes and feature points
+                const TrackableType trackableTypes =
+                    TrackableType.FeaturePoint |
+                    TrackableType.PlaneWithinPolygon;
 
-                // Create a new anchor
-                var anchor = CreateAnchor(hit);
-                if (anchor != null)
+                // Perform the raycast
+                if (m_RaycastManager.Raycast(position, s_Hits, trackableTypes))
                 {
-                    // Remember the anchor so we can remove it later.
-                    m_Anchors.Add(anchor);
-                    Debug.Log(m_Anchors.Count);
-                    if (m_Anchors.Count == numberOfAnchors) CalibrateMiddle();
-                }
-                else
-                {
-                    Logger.Log("Error creating anchor");
+                    // Raycast hits are sorted by distance, so the first one will be the closest hit.
+                    var hit = s_Hits[0];
+
+                    // Create a new anchor
+                    var anchor = CreateAnchor(hit);
+                    if (anchor != null)
+                    {
+                        // Remember the anchor so we can remove it later.
+                        m_Anchors.Add(anchor);
+                    }
+                    else
+                    {
+                        Logger.Log("Error creating anchor");
+                    }
                 }
             }
         }
