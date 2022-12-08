@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.XR.ARSubsystems;
 
 namespace UnityEngine.XR.ARFoundation.Samples
@@ -12,15 +13,32 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         GameObject m_Prefab;
         public GameObject middlePrefab;
-        public Transform drawingOrigin;
-
+        Transform drawingOrigin;
+        float yPos;
+        bool calibrated = false;
         public GameObject prefab
         {
             get => m_Prefab;
             set => m_Prefab = value;
+
         }
+        public GameObject resetBtn, calibrateBtn;
 
         public void CalibrateMiddle()
+        {
+            yPos = Camera.main.transform.position.y;
+            drawingOrigin = Instantiate(middlePrefab, getCenter(), Quaternion.identity).transform;
+            setTrackingVisibility(false);
+            if (m_Anchors.Count == 1)
+                drawingOrigin.gameObject.AddComponent<ARAnchor>();
+            calibrated = true;
+            //hide anchors
+            foreach (var anchor in m_Anchors)
+            {
+                anchor.GetComponent<MeshRenderer>().enabled = false;   
+            }
+        }
+        public Vector3 getCenter()
         {
             var centroid = new Vector3(0, 0, 0);
             var numPoints = m_Anchors.Count;
@@ -30,10 +48,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
 
             centroid /= numPoints;
-            centroid = new Vector3(centroid.x, Camera.main.transform.position.y, centroid.z);
-
-            drawingOrigin = Instantiate(middlePrefab, centroid, Quaternion.identity).transform;
-            setTrackingVisibility(false);
+           return new Vector3(centroid.x, yPos, centroid.z);
         }
 
         public void Reset()
@@ -46,6 +61,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_Anchors.Clear();
             Destroy(drawingOrigin.gameObject);
             setTrackingVisibility(true);
+            calibrated = false;
         }
         void setTrackingVisibility(bool visible)
         {
@@ -55,8 +71,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
             var arPointCloudManager = this.GetComponent<ARPointCloudManager>();
             arPointCloudManager.SetTrackablesActive(visible);
             arPointCloudManager.pointCloudPrefab.SetActive(visible);
+            resetBtn.SetActive(!visible);
+            calibrateBtn.SetActive(visible);
         }
 
+        void Update()
+        {
+            if (drawingOrigin&&m_Anchors.Count>1)
+            {
+                drawingOrigin.transform.position=getCenter();
+            }
+        }
 
         protected override void Awake()
         {
@@ -104,7 +129,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                         anchor = m_AnchorManager.AttachAnchor(plane, hit.pose);
                     }
 
-                    SetAnchorText(anchor, $"Attached to plane {plane.trackableId}");
+                    //SetAnchorText(anchor, $"Attached to plane {plane.trackableId}");
                     return anchor;
                 }
             }
@@ -127,14 +152,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 anchor = gameObject.AddComponent<ARAnchor>();
             }
 
-            SetAnchorText(anchor, $"Anchor (from {hit.hitType})");
+            //SetAnchorText(anchor, $"Anchor (from {hit.hitType})");
 
             return anchor;
         }
 
         protected override void OnPress(Vector3 position)
         {
-            if (position.y > 240)
+            Debug.Log(position.y);
+            if (position.y < 1300&&!calibrated)
             { //otherwise the calibrate btn is pressed
 
                 // Raycast against planes and feature points
