@@ -137,6 +137,9 @@ PlayerSettings:
   bundleVersion: 0.1
   preloadedAssets:
   - {fileID: 0}
+  - {fileID: 11400000, guid: cde1627e2fce08b45976ce75d1105575, type: 2}
+  - {fileID: 3379639177970937181, guid: 6879f20f07aa6bc46967708f401647c3, type: 2}
+  - {fileID: 1011896089261518637, guid: 0de0f757031c98b45adfe1ea8d0b5009, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -724,7 +727,7 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Drawing-App-Getting-Started
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: C:\Users\nadab\Desktop\ARt\Drawer\Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
