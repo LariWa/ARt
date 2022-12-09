@@ -35,7 +35,16 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         // Requirement for implementing the interface
         if (drawing){
             linePoints.Clear();
+            
             drawing = false;
+            
+            MeshCollider meshCollider = newLine.AddComponent<MeshCollider>();
+            Mesh mesh = new Mesh();
+            drawLine.BakeMesh(mesh);
+            meshCollider.sharedMesh = mesh; //this the one that creates the second one!!!
+
+
+            
         }
         
     }
@@ -56,7 +65,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             Debug.Log(linePoints.Count);
             newLine = new GameObject();
             newLine.AddComponent<LineBehavior>();
-            // newLine.AddComponent(IMixedRealityInputHandler);
+            
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material = new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = Color.red;
@@ -86,20 +95,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
   // Detecting the air tap gesture
     void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
-        {
-            // if (eventData.InputSource.SourceName == "Right Hand" || eventData.InputSource.SourceName == "Mixed Reality Controller Right")
-            // {
-            //         // Do something when the user does an air tap using their right hand only
-            //         Debug.Log(linePoints.Count);
-            //         newLine = new GameObject();
-            //         drawLine = newLine.AddComponent<LineRenderer>();
-            //         drawLine.material = new Material (Shader.Find("Sprites/Default"));
-            //         drawLine.startColor = Color.blue;
-            //         drawLine.endColor = Color.blue;
-            //         drawLine.startWidth = lineWidth;
-            //         drawLine.endWidth = lineWidth;
-            // }
-
+        {       
             
         }
 

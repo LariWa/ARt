@@ -17,11 +17,13 @@ public class LineBehavior : MonoBehaviour, IMixedRealityPointerHandler
     void IMixedRealityPointerHandler.OnPointerDown(
        MixedRealityPointerEventData eventData)
     {   
+
+
         if (eventData.InputSource.SourceName == "Left Hand" || eventData.InputSource.SourceName == "Mixed Reality Controller Left"){
                 
                 Destroy (gameObject);
 
-            }
+        }
         
     }
 
