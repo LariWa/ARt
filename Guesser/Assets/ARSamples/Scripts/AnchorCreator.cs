@@ -12,8 +12,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         [SerializeField]
         GameObject m_Prefab;
-        public GameObject middlePrefab;
-        Transform drawingOrigin;
+        public Transform drawingOrigin;
         float yPos;
         bool calibrated = false;
         public GameObject prefab
@@ -23,11 +22,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         }
         public GameObject resetBtn, calibrateBtn;
-
         public void CalibrateMiddle()
         {
             yPos = Camera.main.transform.position.y;
-            drawingOrigin = Instantiate(middlePrefab, getCenter(), Quaternion.identity).transform;
+            drawingOrigin.position = getCenter();
+            drawingOrigin.rotation =  Camera.main.transform.rotation;
             setTrackingVisibility(false);
             if (m_Anchors.Count == 1)
                 drawingOrigin.gameObject.AddComponent<ARAnchor>();
@@ -59,7 +58,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 Destroy(anchor.gameObject);
             }
             m_Anchors.Clear();
-            Destroy(drawingOrigin.gameObject);
+            //Destroy(drawingOrigin.gameObject);
             setTrackingVisibility(true);
             calibrated = false;
         }
@@ -159,7 +158,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         protected override void OnPress(Vector3 position)
         {
-            Debug.Log(position.y);
             if (position.y < 1300&&!calibrated)
             { //otherwise the calibrate btn is pressed
 

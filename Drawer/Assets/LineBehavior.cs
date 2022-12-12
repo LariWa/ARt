@@ -6,42 +6,57 @@ using UnityEngine;
 
 
 
-public class LineBehavior : MonoBehaviour, IMixedRealityPointerHandler
+public class LineBehavior : MonoBehaviour // , IMixedRealityPointerHandler
 {
     
-    void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
-    {
+//     void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
+//     {
         
-    }
+//     }
 
-    void IMixedRealityPointerHandler.OnPointerDown(
-       MixedRealityPointerEventData eventData)
-    {   
+//     void IMixedRealityPointerHandler.OnPointerDown(
+//        MixedRealityPointerEventData eventData)
+//     {   
 
 
-        if (eventData.InputSource.SourceName == "Left Hand" || eventData.InputSource.SourceName == "Mixed Reality Controller Left"){
+//         if (eventData.InputSource.SourceName == "Left Hand" || eventData.InputSource.SourceName == "Mixed Reality Controller Left"){
                 
-                Destroy (gameObject);
+//                 Destroy (gameObject);
 
-        }
+//         }
         
-    }
+//     }
 
-    void IMixedRealityPointerHandler.OnPointerDragged(
-        MixedRealityPointerEventData eventData)
-    {
-        // Requirement for implementing the interface
+//     void IMixedRealityPointerHandler.OnPointerDragged(
+//         MixedRealityPointerEventData eventData)
+//     {
+//         // Requirement for implementing the interface
        
+//     }
+
+//   // Detecting the air tap gesture
+//     void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
+//     {
+            
+//     }
+    
+    
+    void OnCollisionEnter(Collision collision){
+         if (collision.gameObject.CompareTag("eraser")){
+            Destroy(gameObject);
+         }
     }
 
-  // Detecting the air tap gesture
-    void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-            
-    }
-    
-    
-    
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //    print("mmmmmmmmmmmmmmmmmm");
+    //     if (other.gameObject.tag == "eraser"){
+    //         print("should be erased!");
+    //         Destroy(gameObject);
+    //     }
+    // }
+
+
     
     // Start is called before the first frame update
     void Start()

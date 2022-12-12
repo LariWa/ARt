@@ -32,7 +32,7 @@ public class TimerController : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime; //lower the amount of remaining time by the amount of time that has passed
-                Debug.Log("Time is going" + string.Format("{0:N2}", timeRemaining));
+                // Debug.Log("Time is going" + string.Format("{0:N2}", timeRemaining));
                 int minutes = Mathf.FloorToInt(timeRemaining / 60);
                 int seconds = Mathf.FloorToInt(timeRemaining % 60);
                 string zero = ""; //might add a zero to format the time
