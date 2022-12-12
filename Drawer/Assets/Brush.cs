@@ -19,6 +19,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     System.DateTime previousDrawingTime;
     System.DateTime currentDrawingTime = System.DateTime.Now;
     public float timerdelay;
+    public Color lineColor = Color.green;
     public Material drawingMaterial;
 
     GameObject newLine;
@@ -67,10 +68,10 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
-            drawLine.startColor = Color.red;
-            drawLine.endColor = Color.red;
-            drawLine.startWidth = 0.03f;
-            drawLine.endWidth = 0.02f;
+            drawLine.startColor = lineColor;
+            drawLine.endColor = lineColor;
+            drawLine.startWidth = lineWidth;
+            drawLine.endWidth = lineWidth;
             
         }
     }
@@ -79,7 +80,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         MixedRealityPointerEventData eventData)
     {
         // Requirement for implementing the interface
-        Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), getIndexPosition(), Color.red);
+        Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), getIndexPosition(), lineColor);
             
             if (drawing){
                 timer -= Time.deltaTime;
