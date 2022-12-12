@@ -98,7 +98,7 @@ public class BaseClient : MonoBehaviour
     public virtual void OnData(DataStreamReader stream)
     {
         NetMessage msg = null;
-        var opCode = (OpCode)stream.ReadInt();
+        var opCode = (OpCode)stream.ReadByte();
         switch (opCode)
         {
             case OpCode.RENDERER_MSG: msg = new Net_RendererMessage(stream); break;
