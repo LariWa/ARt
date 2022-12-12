@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    public Brush brush;
+    public PaintBrush brush;
     // Start is called before the first frame update
     void Start()
     {
