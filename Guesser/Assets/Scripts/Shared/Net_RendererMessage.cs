@@ -65,10 +65,9 @@ public class Net_RendererMessage : NetMessage
         Debug.Log("Found");
       }
 
-      //LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
-      //Vector3 points = new Vector3(posX, posY, posZ);
-
-      //drawLine.SetPosition(count, points);
+      LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
+      drawLine.positionCount++;
+      drawLine.SetPosition(count - 1, new Vector3(posX, posY, posZ));
   }
 
 }

@@ -11,7 +11,7 @@ public class Net_CreateMessage : NetMessage
 
   GameObject newLine;
   LineRenderer drawLine;
-  float lineWidth;
+  float lineWidth = 0.01f;
 
   public Net_CreateMessage()
   {
