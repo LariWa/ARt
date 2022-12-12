@@ -12,8 +12,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
         [SerializeField]
         GameObject m_Prefab;
-        public GameObject middlePrefab;
-        Transform drawingOrigin;
+        public Transform drawingOrigin;
         float yPos;
         bool calibrated = false;
         public GameObject prefab
@@ -26,7 +25,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void CalibrateMiddle()
         {
             yPos = Camera.main.transform.position.y;
-            drawingOrigin = Instantiate(middlePrefab, getCenter(), Camera.main.transform.rotation).transform;
+            drawingOrigin.position = getCenter();
+            drawingOrigin.rotation =  Camera.main.transform.rotation;
             setTrackingVisibility(false);
             if (m_Anchors.Count == 1)
                 drawingOrigin.gameObject.AddComponent<ARAnchor>();
@@ -58,7 +58,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 Destroy(anchor.gameObject);
             }
             m_Anchors.Clear();
-            Destroy(drawingOrigin.gameObject);
+            //Destroy(drawingOrigin.gameObject);
             setTrackingVisibility(true);
             calibrated = false;
         }
