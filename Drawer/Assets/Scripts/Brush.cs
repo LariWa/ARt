@@ -5,6 +5,9 @@ using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using static LineBehavior;
 
+
+using UnityEngine;
+
 using UnityEngine;
 
 //, IMixedRealityTouchHandler, IMixedRealityInputHandler
@@ -22,24 +25,33 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     public float lineWidth;
 
     Vector2 lastPos;
-
-    private BaseServer server;
-
+        
     private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
+
+	
 
 	void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
         // Requirement for implementing the interface
         if (drawing){
             linePoints.Clear();
+            
             drawing = false;
-        }
+            
+            MeshCollider meshCollider = newLine.AddComponent<MeshCollider>();
+            Mesh mesh = new Mesh();
+            drawLine.BakeMesh(mesh);
+            meshCollider.sharedMesh = mesh; //this the one that creates the second one!!!
 
+
+            
+        }
+        
     }
 
     void IMixedRealityPointerHandler.OnPointerDown(
        MixedRealityPointerEventData eventData)
-    {
+    {   
         previousDrawingTime = currentDrawingTime;
         currentDrawingTime = System.DateTime.Now;
         System.TimeSpan diff = currentDrawingTime - previousDrawingTime;
@@ -52,16 +64,15 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         if (drawing){
             Debug.Log(linePoints.Count);
             newLine = new GameObject();
-            newLine.name = "Drawing";
             newLine.AddComponent<LineBehavior>();
-            // newLine.AddComponent(IMixedRealityInputHandler);
+            
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material = new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = Color.red;
             drawLine.endColor = Color.red;
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
-
+            
         }
     }
 
@@ -70,7 +81,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     {
         // Requirement for implementing the interface
         Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), getIndexPosition(), Color.red);
-
+            
             if (drawing){
                 timer -= Time.deltaTime;
                 if (timer <= 0){
@@ -84,21 +95,8 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
   // Detecting the air tap gesture
     void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
-        {
-            // if (eventData.InputSource.SourceName == "Right Hand" || eventData.InputSource.SourceName == "Mixed Reality Controller Right")
-            // {
-            //         // Do something when the user does an air tap using their right hand only
-            //         Debug.Log(linePoints.Count);
-            //         newLine = new GameObject();
-            //         drawLine = newLine.AddComponent<LineRenderer>();
-            //         drawLine.material = new Material (Shader.Find("Sprites/Default"));
-            //         drawLine.startColor = Color.blue;
-            //         drawLine.endColor = Color.blue;
-            //         drawLine.startWidth = lineWidth;
-            //         drawLine.endWidth = lineWidth;
-            // }
-
-
+        {       
+            
         }
 
     public Vector3 getIndexPosition(){
@@ -111,13 +109,13 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     }
 
     private void Awake()  {}
-
+    
 
     void Start(){
-        server = FindObjectOfType<BaseServer>();
         linePoints = new List<Vector3>();
         timer = timerdelay;
     }
 
 
 }
+   

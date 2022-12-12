@@ -3653,7 +3653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Prefab: {fileID: 1300533017533536024, guid: 0c0b00d1118cf7d408c24ce26a3d33cf,
     type: 3}
-  middlePrefab: {fileID: 1300533017533536024, guid: fbf5699ceacdfe74e8c64f7db0e0ec5a,
+  middlePrefab: {fileID: 8182956443887353202, guid: 7ab75e6d1363a42c883343aef7bc3596,
     type: 3}
   resetBtn: {fileID: 2097849051}
   calibrateBtn: {fileID: 463744187}
