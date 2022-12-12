@@ -5,9 +5,6 @@ using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using static LineBehavior;
 
-
-using UnityEngine;
-
 using UnityEngine;
 
 //, IMixedRealityTouchHandler, IMixedRealityInputHandler
@@ -25,10 +22,10 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     public float lineWidth;
 
     Vector2 lastPos;
-        
-    private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
 
-	
+    private BaseServer server;
+
+    private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
 
 	void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
@@ -37,12 +34,12 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             linePoints.Clear();
             drawing = false;
         }
-        
+
     }
 
     void IMixedRealityPointerHandler.OnPointerDown(
        MixedRealityPointerEventData eventData)
-    {   
+    {
         previousDrawingTime = currentDrawingTime;
         currentDrawingTime = System.DateTime.Now;
         System.TimeSpan diff = currentDrawingTime - previousDrawingTime;
@@ -55,6 +52,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         if (drawing){
             Debug.Log(linePoints.Count);
             newLine = new GameObject();
+            newLine.name = "Drawing";
             newLine.AddComponent<LineBehavior>();
             // newLine.AddComponent(IMixedRealityInputHandler);
             drawLine = newLine.AddComponent<LineRenderer>();
@@ -63,7 +61,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             drawLine.endColor = Color.red;
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
-            
+
         }
     }
 
@@ -72,7 +70,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     {
         // Requirement for implementing the interface
         Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), getIndexPosition(), Color.red);
-            
+
             if (drawing){
                 timer -= Time.deltaTime;
                 if (timer <= 0){
@@ -100,7 +98,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             //         drawLine.endWidth = lineWidth;
             // }
 
-            
+
         }
 
     public Vector3 getIndexPosition(){
@@ -113,13 +111,13 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     }
 
     private void Awake()  {}
-    
+
 
     void Start(){
+        server = FindObjectOfType<BaseServer>();
         linePoints = new List<Vector3>();
         timer = timerdelay;
     }
 
 
 }
-   

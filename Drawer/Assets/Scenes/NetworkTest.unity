@@ -389,6 +389,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!65 &222517204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222517195}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &225039240
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225039241}
   - component: {fileID: 225039242}
+  - component: {fileID: 225039243}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -431,6 +445,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df4f4804e036345d09d4469cb6888f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &225039243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225039240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f8680926b2849399c64f6314f84af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &244876075
@@ -1141,7 +1167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &1841168516
 LineRenderer:
   m_ObjectHideFlags: 0
