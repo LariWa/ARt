@@ -79,7 +79,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             drawLine.endColor = lineColor;
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
-
+            drawLine.useWorldSpace = false;
         }
     }
 

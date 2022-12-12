@@ -14,6 +14,7 @@ public class BaseClient : MonoBehaviour
     public float connectInterval = 1f;
     private float lastTry;
     string ipServer;
+    public Transform drawingOrigin;
 
     private void Start()
     {

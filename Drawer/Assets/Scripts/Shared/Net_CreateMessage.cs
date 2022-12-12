@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Networking.Transport;
+using UnityEngine.XR.ARFoundation.Samples;
 //using static LineBehavior;
 
 public class Net_CreateMessage : NetMessage
@@ -57,6 +58,7 @@ public class Net_CreateMessage : NetMessage
       Debug.Log("CLIENT: New object created");
 
       newLine = new GameObject();
+      newLine.transform.parent = BaseClient.instance.drawingOrigin;
       newLine.name = "Drawing " + entryId;
       //newLine.AddComponent<LineBehavior>();
 
@@ -66,7 +68,8 @@ public class Net_CreateMessage : NetMessage
       drawLine.endColor = Color.red;
       drawLine.startWidth = lineWidth; // replace with brush
       drawLine.endWidth = lineWidth;
+      drawLine.useWorldSpace = false;
 
-  }
+    }
 
 }

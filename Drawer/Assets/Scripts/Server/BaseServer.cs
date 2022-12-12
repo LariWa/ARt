@@ -95,7 +95,7 @@ public class BaseServer : MonoBehaviour
     public virtual void OnData(DataStreamReader stream)
     {
         NetMessage msg = null;
-        var opCode = (OpCode)stream.ReadByte();
+        var opCode = (OpCode)stream.ReadInt();
         switch (opCode)
         {
             case OpCode.RENDERER_MSG: msg = new Net_RendererMessage(stream); break;
