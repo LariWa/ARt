@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine;
 
 //, IMixedRealityTouchHandler, IMixedRealityInputHandler
-public class Brush : MonoBehaviour, IMixedRealityPointerHandler
+public class PaintBrush : MonoBehaviour, IMixedRealityPointerHandler
 {
     List<Vector3> linePoints;
     float timer;

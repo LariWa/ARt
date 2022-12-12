@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine;
 
 //, IMixedRealityTouchHandler, IMixedRealityInputHandler
-public class Brush : MonoBehaviour, IMixedRealityPointerHandler
+public class HighlighterBrush : MonoBehaviour, IMixedRealityPointerHandler
 {
     List<Vector3> linePoints;
     float timer;
@@ -69,8 +69,8 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = Color.red;
             drawLine.endColor = Color.red;
-            drawLine.startWidth = 0.03f;
-            drawLine.endWidth = 0.02f;
+            drawLine.startWidth = 0.015f;
+            drawLine.endWidth = 0.015f;
             
         }
     }
