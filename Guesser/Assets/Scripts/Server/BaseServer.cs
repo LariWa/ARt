@@ -100,6 +100,7 @@ public class BaseServer : MonoBehaviour
         {
             case OpCode.RENDERER_MSG: msg = new Net_RendererMessage(stream); break;
             case OpCode.CODE_MSG: msg = new Net_MsgCode(stream); break;
+            case OpCode.CREATE_MSG: msg = new Net_CreateMessage(stream); break;
 
             default:
                 Debug.Log("message received had no OpCode");

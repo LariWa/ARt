@@ -1,14 +1,14 @@
 using UnityEngine;
 using Unity.Networking.Transport;
+//using static LineBehavior;
 
 public class Net_RendererMessage : NetMessage
 {
   public int entryId { set; get; }
+  public int count { set; get; }
   public float posX { set; get; }
   public float posY { set; get; }
   public float posZ { set; get; }
-  //public Color color { set; get; }
-  //public int brush { set; get; }
 
   public Net_RendererMessage()
   {
@@ -21,31 +21,30 @@ public class Net_RendererMessage : NetMessage
     Deserialize(reader);
   }
 
-  public Net_RendererMessage(float x, float y, float z, int id)
+  public Net_RendererMessage(int id, int c, float x, float y, float z)
   {
     Code = OpCode.RENDERER_MSG;
     entryId = id;
+    count = c;
     posX = x;
     posY = y;
     posZ = z;
-    //color = c;
-    //brush = b;
   }
 
   public override void Serialize(ref DataStreamWriter writer)
   {
     writer.WriteByte((byte)Code);
     writer.WriteInt(entryId);
+    writer.WriteInt(count);
     writer.WriteFloat(posX);
     writer.WriteFloat(posY);
     writer.WriteFloat(posZ);
-    //writer.WriteColor(color);
-    //writer.WriteInt(brush);
   }
 
   public override void Deserialize(DataStreamReader reader)
   {
     entryId = reader.ReadInt();
+    count = reader.ReadInt();
     posX = reader.ReadFloat();
     posY = reader.ReadFloat();
     posZ = reader.ReadFloat();
@@ -58,7 +57,18 @@ public class Net_RendererMessage : NetMessage
 
   public override void ReceivedOnClient()
   {
-      Debug.Log("CLIENT:" + posX + "/" + posY + "/" + posZ);
+      Debug.Log("Entry " + count + ": " + posX + "/" + posY + "/" + posZ);
+
+
+      GameObject line = GameObject.Find("Drawing " + entryId);
+      if (line != null) {
+        Debug.Log("Found");
+      }
+
+      //LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
+      //Vector3 points = new Vector3(posX, posY, posZ);
+
+      //drawLine.SetPosition(count, points);
   }
 
 }

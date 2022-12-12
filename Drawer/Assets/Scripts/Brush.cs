@@ -4,11 +4,8 @@ using System.Runtime;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using static LineBehavior;
-
-
 using UnityEngine;
 
-using UnityEngine;
 
 //, IMixedRealityTouchHandler, IMixedRealityInputHandler
 public class Brush : MonoBehaviour, IMixedRealityPointerHandler
@@ -25,37 +22,37 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     public float lineWidth;
 
     Vector2 lastPos;
-        
+
     private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
 
-	
+    private BaseServer server;
+    private int id = -1;
+
+
 
 	void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
         // Requirement for implementing the interface
         if (drawing){
             linePoints.Clear();
-            
+
             drawing = false;
-            
+
             MeshCollider meshCollider = newLine.AddComponent<MeshCollider>();
             Mesh mesh = new Mesh();
             drawLine.BakeMesh(mesh);
             meshCollider.sharedMesh = mesh; //this the one that creates the second one!!!
-
-
-            
         }
-        
+
     }
 
     void IMixedRealityPointerHandler.OnPointerDown(
        MixedRealityPointerEventData eventData)
-    {   
+    {
         previousDrawingTime = currentDrawingTime;
         currentDrawingTime = System.DateTime.Now;
         System.TimeSpan diff = currentDrawingTime - previousDrawingTime;
-		double seconds = diff.TotalSeconds;
+		    double seconds = diff.TotalSeconds;
         if (seconds <= 2){
             drawing = true;
         }
@@ -63,16 +60,24 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         // Requirement for implementing the interface
         if (drawing){
             Debug.Log(linePoints.Count);
+
+            id++;
             newLine = new GameObject();
+            newLine.name = "Drawing " + id;
             newLine.AddComponent<LineBehavior>();
-            
+
+            // let client know that a new drawing has been created
+            Net_CreateMessage msg;
+            msg = new Net_CreateMessage(id, 0, 0);
+            server.SendToClient(msg);
+
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material = new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = Color.red;
             drawLine.endColor = Color.red;
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
-            
+
         }
     }
 
@@ -81,7 +86,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     {
         // Requirement for implementing the interface
         Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), getIndexPosition(), Color.red);
-            
+
             if (drawing){
                 timer -= Time.deltaTime;
                 if (timer <= 0){
@@ -89,14 +94,21 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
                     timer = timerdelay;
                     drawLine.positionCount = linePoints.Count;
                     drawLine.SetPositions(linePoints.ToArray());
+
+
+                    // update linePoints on client
+                    Net_RendererMessage msg;
+                    Vector3 points = getIndexPosition();
+                    msg = new Net_RendererMessage(id, linePoints.Count, points.x, points.y, points.z);
+                    server.SendToClient(msg);
                 }
             }
     }
 
   // Detecting the air tap gesture
     void IMixedRealityPointerHandler.OnPointerClicked(MixedRealityPointerEventData eventData)
-        {       
-            
+        {
+
         }
 
     public Vector3 getIndexPosition(){
@@ -109,13 +121,14 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     }
 
     private void Awake()  {}
-    
+
 
     void Start(){
         linePoints = new List<Vector3>();
         timer = timerdelay;
+
+        server = FindObjectOfType<BaseServer>();
     }
 
 
 }
-   
