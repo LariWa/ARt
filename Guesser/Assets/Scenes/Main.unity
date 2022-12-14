@@ -3654,7 +3654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Prefab: {fileID: 1300533017533536024, guid: 0c0b00d1118cf7d408c24ce26a3d33cf,
     type: 3}
-  drawingOrigin: {fileID: 0}
+  drawingOrigin: {fileID: 1941632870}
   resetBtn: {fileID: 2097849051}
   calibrateBtn: {fileID: 463744187}
 --- !u!114 &1860063800

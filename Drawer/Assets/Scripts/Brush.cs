@@ -22,7 +22,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     GameObject newLine;
     LineRenderer drawLine;
     public float lineWidth;
-
+    GameObject drawingOrigin;
     Vector2 lastPos;
 
     private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
@@ -31,7 +31,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     private int id = -1;
 
 
-
+   
 	void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
         // Requirement for implementing the interface
@@ -65,6 +65,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             id++;
             newLine = new GameObject();
+            newLine.transform.parent = drawingOrigin.transform;
             newLine.name = "Drawing " + id;
             newLine.AddComponent<LineBehavior>();
 
@@ -72,7 +73,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             Net_CreateMessage msg;
             msg = new Net_CreateMessage(id, 0, 0);
             server.SendToClient(msg);
-
+            Debug.Log(newLine.transform.position);
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = lineColor;
@@ -80,6 +81,8 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
             drawLine.useWorldSpace = false;
+            Debug.Log(newLine.transform.position);
+
         }
     }
 
@@ -100,7 +103,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
                     // update linePoints on client
                     Net_RendererMessage msg;
-                    Vector3 points = getIndexPosition();
+                    Vector3 points = drawingOrigin.transform.InverseTransformPoint(getIndexPosition());
                     msg = new Net_RendererMessage(id, linePoints.Count, points.x, points.y, points.z);
                     server.SendToClient(msg);
                 }
@@ -128,7 +131,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     void Start(){
         linePoints = new List<Vector3>();
         timer = timerdelay;
-
+        drawingOrigin = GameObject.Find("drawingOrigin");
         server = FindObjectOfType<BaseServer>();
     }
 

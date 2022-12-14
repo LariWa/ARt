@@ -67,7 +67,7 @@ public class Net_RendererMessage : NetMessage
 
       LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
       drawLine.positionCount++;
-      drawLine.SetPosition(count - 1, new Vector3(posX, posY, posZ));
+      drawLine.SetPosition(count - 1, BaseClient.instance.drawingOrigin.TransformPoint( new Vector3(posX, posY, posZ)));
   }
 
 }
