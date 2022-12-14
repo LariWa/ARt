@@ -7,6 +7,13 @@ public class ScoreController : MonoBehaviour
 {
     private int currentScore = 0;
 
+    public void resetScore(){
+        currentScore = 0;
+        TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
+        textmeshPro.SetText(currentScore.ToString());
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -15,13 +22,18 @@ public class ScoreController : MonoBehaviour
         TimerController timerScript = theTimer.GetComponent<TimerController>();
         bool isRunning = timerScript.getTimerIsRunning();
 
+        GameObject checkbox = GameObject.Find("green checkbox");
+        CheckboxController checkboxScript = checkbox.GetComponent<CheckboxController>();
+        bool checkboxIsHit = checkboxScript.getCheckboxHit();
+
 
         //increase the score
-        if (Input.GetKeyDown("tab") && isRunning)
+        if (checkboxIsHit && isRunning)
         {
             TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
             currentScore++;
             textmeshPro.SetText(currentScore.ToString());
+            checkboxScript.setCheckboxHit(false);
         }
 
 

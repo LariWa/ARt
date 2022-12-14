@@ -15,6 +15,11 @@ public class TimerController : MonoBehaviour
         return timerIsRunning;
     }
 
+    public void setTimeRemaining(float tr){
+        timeRemaining = tr;
+    }
+
+
     private void Start()
     {
         // Starts the timer automatically
