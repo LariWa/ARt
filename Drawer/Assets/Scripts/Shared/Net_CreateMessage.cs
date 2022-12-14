@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Networking.Transport;
-//using UnityEngine.XR.ARFoundation.Samples;
+using UnityEngine.XR.ARFoundation.Samples;
 //using static LineBehavior;
 
 public class Net_CreateMessage : NetMessage
@@ -63,6 +63,7 @@ public class Net_CreateMessage : NetMessage
       //newLine.AddComponent<LineBehavior>();
 
       drawLine = newLine.AddComponent<LineRenderer>();
+      drawLine.positionCount--;
       drawLine.material = new Material (Shader.Find("Sprites/Default"));
       drawLine.startColor = Color.red; // replace with color
       drawLine.endColor = Color.red;

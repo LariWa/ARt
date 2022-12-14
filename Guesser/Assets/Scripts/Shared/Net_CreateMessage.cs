@@ -63,6 +63,7 @@ public class Net_CreateMessage : NetMessage
       //newLine.AddComponent<LineBehavior>();
 
       drawLine = newLine.AddComponent<LineRenderer>();
+      drawLine.positionCount--;
       drawLine.material = new Material (Shader.Find("Sprites/Default"));
       drawLine.startColor = Color.red; // replace with color
       drawLine.endColor = Color.red;

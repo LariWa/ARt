@@ -10,6 +10,8 @@ public class Net_RendererMessage : NetMessage
   public float posY { set; get; }
   public float posZ { set; get; }
 
+  Vector3 comp = new Vector3(0,0,0);
+
   public Net_RendererMessage()
   {
     Code = OpCode.RENDERER_MSG;
@@ -57,17 +59,20 @@ public class Net_RendererMessage : NetMessage
 
   public override void ReceivedOnClient()
   {
-      Debug.Log("Entry " + count + ": " + posX + "/" + posY + "/" + posZ);
+      //Debug.Log("Entry " + count + ": " + posX + "/" + posY + "/" + posZ);
 
+      if (!(posX == 0 && posY == 0 && posZ == 0)) {
+        GameObject line = GameObject.Find("Drawing " + entryId);
+        LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
+        Debug.Log(count);
 
-      GameObject line = GameObject.Find("Drawing " + entryId);
-      if (line != null) {
-        Debug.Log("Found");
+        if (count == 1) {
+           drawLine.SetPosition(count - 1, BaseClient.instance.drawingOrigin.TransformPoint( new Vector3(posX, posY, posZ)));
+        }
+
+        drawLine.positionCount++;
+        drawLine.SetPosition(count, BaseClient.instance.drawingOrigin.TransformPoint( new Vector3(posX, posY, posZ)));
       }
-
-      LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
-      drawLine.positionCount++;
-      drawLine.SetPosition(count - 1, BaseClient.instance.drawingOrigin.TransformPoint( new Vector3(posX, posY, posZ)));
   }
 
 }
