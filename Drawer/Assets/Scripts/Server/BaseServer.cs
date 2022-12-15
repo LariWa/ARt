@@ -95,12 +95,13 @@ public class BaseServer : MonoBehaviour
     public virtual void OnData(DataStreamReader stream)
     {
         NetMessage msg = null;
-        var opCode = (OpCode)stream.ReadInt();
+        var opCode = (OpCode)stream.ReadByte();
         switch (opCode)
         {
             case OpCode.RENDERER_MSG: msg = new Net_RendererMessage(stream); break;
             case OpCode.CODE_MSG: msg = new Net_MsgCode(stream); break;
             case OpCode.CREATE_MSG: msg = new Net_CreateMessage(stream); break;
+            case OpCode.ERASE_MSG: msg = new Net_EraseMessage(stream); break;
 
             default:
                 Debug.Log("message received had no OpCode");

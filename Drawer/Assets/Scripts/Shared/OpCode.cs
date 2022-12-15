@@ -3,6 +3,7 @@ public enum OpCode
     RENDERER_MSG = 1,
     CODE_MSG = 2,
     CREATE_MSG = 3,
+    ERASE_MSG = 4,
 }
 
 public enum actionTypeCode
