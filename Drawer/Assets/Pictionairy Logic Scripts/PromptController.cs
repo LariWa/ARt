@@ -20,7 +20,16 @@ public class PromptController : MonoBehaviour
         "Bobsleding",
         "Synchornized swimming",
         "Baking christmas cookies",
-        "Baking lasagna"
+        "Baking lasagna",
+        "Climbing a tree",
+        "Laying in bed",
+        "Swimming",
+        "Bowling",
+        "Fishing",
+        "Playing piano",
+        "Listening to music",
+        "Watching television",
+        "Typing on a keyboard"
     };
 
     void Start()
