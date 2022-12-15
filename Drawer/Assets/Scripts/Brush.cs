@@ -65,6 +65,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             id++;
             newLine = new GameObject();
+            newLine.tag = "drawing";
             newLine.transform.parent = drawingOrigin.transform;
             newLine.name = "Drawing " + id;
             newLine.AddComponent<LineBehavior>();
