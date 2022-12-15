@@ -32,10 +32,13 @@ public class RestartController : MonoBehaviour
             GameObject theTimer = GameObject.Find("Timer");
             TimerController timerScript = theTimer.GetComponent<TimerController>(); //get the timer script from the object
             timerScript.setTimeRemaining(120.0f);
+            timerScript.setIsRunning(true);
 
             GameObject theScore = GameObject.Find("Score");
             ScoreController scoreScript = theScore.GetComponent<ScoreController>();
             scoreScript.resetScore();
+
+           
         }
         
         Debug.Log("ontriggerExit called ");
