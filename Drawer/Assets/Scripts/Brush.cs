@@ -65,6 +65,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             id++;
             newLine = new GameObject();
+            newLine.tag = "drawing";
             newLine.transform.parent = drawingOrigin.transform;
             newLine.name = "Drawing " + id;
             newLine.AddComponent<LineBehavior>();
@@ -117,12 +118,14 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         }
 
     public Vector3 getIndexPosition(){
-        MixedRealityPose pose;
+        /*MixedRealityPose pose;
             if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose))
             {
                 return pose.Position;
             }
-            return new Vector3(0,0,0);
+            return new Vector3(0,0,0);*/
+        Transform child = transform.Find("Tip");
+        return child.position;
     }
 
     private void Awake()  {}
@@ -133,6 +136,9 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         timer = timerdelay;
         drawingOrigin = GameObject.Find("drawingOrigin");
         server = FindObjectOfType<BaseServer>();
+        PointerUtils.SetMotionControllerRayPointerBehavior(PointerBehavior.AlwaysOff);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Right);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Left);
     }
 
 
