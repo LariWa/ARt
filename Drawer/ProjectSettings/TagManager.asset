@@ -6,6 +6,7 @@ TagManager:
   tags:
   - eraser
   - drawing
+  - tip
   layers:
   - Default
   - TransparentFX

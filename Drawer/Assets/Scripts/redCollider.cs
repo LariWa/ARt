@@ -26,9 +26,14 @@ public class redCollider : MonoBehaviour
 
     void OnTriggerExit(Collider collision) 
     {
-        colorManager.onChangeColor(color);
-        Debug.Log(Color.red);
-        Debug.Log(color);
+        if (collision.gameObject.tag == "tip")
+        {
+            colorManager.onChangeColor(color);
+            Debug.Log(collision.gameObject);
+            Debug.Log("change COLOR");
+            Debug.Log(Color.red);
+            Debug.Log(color);
+        }
         
     }
 

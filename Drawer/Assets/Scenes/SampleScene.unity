@@ -1237,6 +1237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorPalet
       objectReference: {fileID: 0}
+    - target: {fileID: 8498059336323623190, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
 --- !u!1 &624141077 stripped
@@ -1877,7 +1881,7 @@ GameObject:
   - component: {fileID: 948937948}
   m_Layer: 0
   m_Name: Tip
-  m_TagString: Untagged
+  m_TagString: tip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1890,7 +1894,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948937946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.316, y: 2.815, z: -0.191}
+  m_LocalPosition: {x: -0.68, y: 3.22, z: -0.19}
   m_LocalScale: {x: 0.080761, y: 0.080761, z: 0.080761}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1908,8 +1912,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.4739051
+  m_Center: {x: -0.5260949, y: 0, z: 0}
 --- !u!23 &948937949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2164,6 +2168,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b5bac7f2b0b6ae64387d5c9fde908723, type: 3}
   m_PrefabInstance: {fileID: 1333575078}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1072135168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5942268799247414575, guid: 966f59b294c45a446b4713a96894c222, type: 3}
+  m_PrefabInstance: {fileID: 1995284370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1072135170
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072135168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1148033536
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2194,7 +2216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa2ca693fd344b6990c12476418100a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.8978462, g: 0, b: 1, a: 1}
+  color: {r: 1, g: 0, b: 1, a: 1}
 --- !u!54 &1160452275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2211,6 +2233,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &1160452279
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160452273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2004637657950826250, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
 --- !u!1001 &1186364235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3076,7 +3112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa2ca693fd344b6990c12476418100a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0.924858, b: 0, a: 1}
+  color: {r: 1, g: 1, b: 0, a: 1}
 --- !u!54 &1480945244
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3155,7 +3191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa2ca693fd344b6990c12476418100a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.02520442, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!64 &1761995780
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3704,6 +3740,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5942268799247414575, guid: 966f59b294c45a446b4713a96894c222, type: 3}
+      propertyPath: m_TagString
+      value: tip
+      objectReference: {fileID: 0}
     - target: {fileID: 5942268799403759899, guid: 966f59b294c45a446b4713a96894c222, type: 3}
       propertyPath: m_Name
       value: Highlighter
@@ -3768,7 +3808,7 @@ GameObject:
   - component: {fileID: 1998035187}
   m_Layer: 0
   m_Name: Tip
-  m_TagString: Untagged
+  m_TagString: tip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3799,8 +3839,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 10
+  m_Center: {x: 0, y: 0.100000024, z: 0}
 --- !u!23 &1998035188
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4016,7 +4056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa2ca693fd344b6990c12476418100a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.09620416, g: 1, b: 0, a: 1}
+  color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!64 &2012710254
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4121,7 +4161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409841147261660634, guid: d19916bb4119584f6930f8d00051f895, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.11
+      value: 0.189
       objectReference: {fileID: 0}
     - target: {fileID: 409841147261660634, guid: d19916bb4119584f6930f8d00051f895, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4166,6 +4206,18 @@ PrefabInstance:
     - target: {fileID: 1079699487060850528, guid: d19916bb4119584f6930f8d00051f895, type: 3}
       propertyPath: m_Name
       value: Brush
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184860880480476573, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908680621783239397, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6897681001301907680, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.72
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1079699487060849816, guid: d19916bb4119584f6930f8d00051f895, type: 3}

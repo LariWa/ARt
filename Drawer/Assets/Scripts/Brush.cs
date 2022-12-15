@@ -80,7 +80,6 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             msg = new Net_CreateMessage(id, Array.IndexOf(colors, lineColor), 0);
             server.SendToClient(msg);
 
-            Debug.Log(newLine.transform.position);
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
             drawLine.startColor = lineColor;
@@ -88,7 +87,6 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
             drawLine.startWidth = lineWidth;
             drawLine.endWidth = lineWidth;
             drawLine.useWorldSpace = false;
-            Debug.Log(newLine.transform.position);
 
         }
     }
