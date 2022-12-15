@@ -1,18 +1,16 @@
 using UnityEngine;
 using Unity.Networking.Transport;
-//using UnityEngine.XR.ARFoundation.Samples;
-//using static LineBehavior;
 
 public class Net_CreateMessage : NetMessage
 {
   public int entryId { set; get; }
   public int color { set; get; }
   public int brush { set; get; }
-  // material
 
   GameObject newLine;
   LineRenderer drawLine;
   float lineWidth = 0.01f;
+  Color[] colors = new Color[] { Color.red, Color.grey, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
 
   public Net_CreateMessage()
   {
@@ -60,13 +58,13 @@ public class Net_CreateMessage : NetMessage
       newLine = new GameObject();
       newLine.transform.parent = BaseClient.instance.drawingOrigin;
       newLine.name = "Drawing " + entryId;
-      //newLine.AddComponent<LineBehavior>();
+      newLine.tag = "drawing";
 
       drawLine = newLine.AddComponent<LineRenderer>();
       drawLine.positionCount--;
       drawLine.material = new Material (Shader.Find("Sprites/Default"));
-      drawLine.startColor = Color.red; // replace with color
-      drawLine.endColor = Color.red;
+      drawLine.startColor = colors[color];
+      drawLine.endColor = colors[color];
       drawLine.startWidth = lineWidth; // replace with brush
       drawLine.endWidth = lineWidth;
       drawLine.useWorldSpace = false;
