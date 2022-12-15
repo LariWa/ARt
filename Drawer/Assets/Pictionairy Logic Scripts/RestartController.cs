@@ -37,8 +37,13 @@ public class RestartController : MonoBehaviour
             GameObject theScore = GameObject.Find("Score");
             ScoreController scoreScript = theScore.GetComponent<ScoreController>();
             scoreScript.resetScore();
+            //erase drawings
+            var drawings = GameObject.FindGameObjectsWithTag("drawing");
+            foreach (GameObject drawing in drawings)
+            {
+                Destroy(drawing);
+            }
 
-           
         }
         
         Debug.Log("ontriggerExit called ");

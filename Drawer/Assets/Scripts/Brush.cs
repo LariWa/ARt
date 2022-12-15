@@ -65,6 +65,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             id++;
             newLine = new GameObject();
+            newLine.tag = "drawing";
             newLine.transform.parent = drawingOrigin.transform;
             newLine.name = "Drawing " + id;
             newLine.AddComponent<LineBehavior>();
@@ -135,6 +136,9 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         timer = timerdelay;
         drawingOrigin = GameObject.Find("drawingOrigin");
         server = FindObjectOfType<BaseServer>();
+        PointerUtils.SetMotionControllerRayPointerBehavior(PointerBehavior.AlwaysOff);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Right);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Left);
     }
 
 
