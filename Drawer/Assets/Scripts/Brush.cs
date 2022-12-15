@@ -19,7 +19,9 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     public float timerdelay;
 
     public Color lineColor = Color.red;
-    Color[] colors = new Color[] { Color.red, Color.grey, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
+    static Color orange =  new Color(1, 0.5f, 0, 1);
+    Color[] colors = new Color[] { Color.red, orange, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
+    string[] brushes = { "Brush", "Highlighter", "Pencil" };
     public Material drawingMaterial;
 
     GameObject newLine;
@@ -75,13 +77,11 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             // let client know that a new drawing has been created
             Net_CreateMessage msg;
-            // 0: red, 1: orange, 2: yellow, 3: green, 4: blue, 5: purple, 6: white, 7: black
-            Debug.Log(System.Array.IndexOf(colors, lineColor));
-            msg = new Net_CreateMessage(id, Array.IndexOf(colors, lineColor), 0);
+            msg = new Net_CreateMessage(id, Array.IndexOf(colors, lineColor), Array.IndexOf(brushes, this.name));
             server.SendToClient(msg);
 
             drawLine = newLine.AddComponent<LineRenderer>();
-            drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
+            drawLine.material =  drawingMaterial;
             drawLine.startColor = lineColor;
             drawLine.endColor = lineColor;
             drawLine.startWidth = lineWidth;
