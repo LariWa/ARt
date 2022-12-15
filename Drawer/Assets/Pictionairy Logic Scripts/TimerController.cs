@@ -28,7 +28,7 @@ public class TimerController : MonoBehaviour
     {
         // Starts the timer automatically
         timerIsRunning = true;
-        timeRemaining = 2f; //how many seconds you start of with
+        timeRemaining = 120f; //how many seconds you start of with
         //Debug.Log("Time is starting!" + string.Format("{0:N2}", timeRemaining));
 
     }
