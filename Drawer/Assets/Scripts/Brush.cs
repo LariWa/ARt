@@ -117,12 +117,14 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         }
 
     public Vector3 getIndexPosition(){
-        MixedRealityPose pose;
+        /*MixedRealityPose pose;
             if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose))
             {
                 return pose.Position;
             }
-            return new Vector3(0,0,0);
+            return new Vector3(0,0,0);*/
+        Transform child = transform.Find("Tip");
+        return child.position;
     }
 
     private void Awake()  {}
