@@ -9,5 +9,6 @@ public enum OpCode
 public enum actionTypeCode
 {
    ERASE = 1,
-   EFFECT = 2
+   EFFECT = 2,
+   RESET = 3
 }
