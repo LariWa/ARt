@@ -43,6 +43,7 @@ public class RestartController : MonoBehaviour
             {
                 Destroy(drawing);
             }
+            BaseServer.instance.SendToClient(new Net_MsgCode(actionTypeCode.RESET));
 
         }
         

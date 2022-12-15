@@ -36,5 +36,10 @@ public class Net_MsgCode : NetMessage
     }
     public override void ReceivedOnClient()
     {
+        var drawings = GameObject.FindGameObjectsWithTag("drawing");
+        foreach (GameObject drawing in drawings)
+        {
+            GameObject.Destroy(drawing);
+        }
     }
 }
