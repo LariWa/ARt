@@ -5,21 +5,14 @@ using UnityEngine;
 public class ColorManager : MonoBehaviour
 {
     public Brush brush;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Brush highlighter;
+    public Brush pencil;
 
     public void onChangeColor(Color newColor)
     {
         brush.lineColor = newColor;
+        highlighter.lineColor = newColor;
+        pencil.lineColor = newColor;
     }
 
 
