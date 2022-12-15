@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime;
@@ -16,7 +17,9 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     System.DateTime previousDrawingTime;
     System.DateTime currentDrawingTime = System.DateTime.Now;
     public float timerdelay;
-    public Color lineColor = Color.green;
+
+    public Color lineColor = Color.red;
+    Color[] colors = new Color[] { Color.red, Color.grey, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
     public Material drawingMaterial;
 
     GameObject newLine;
@@ -31,7 +34,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     private int id = -1;
 
 
-   
+
 	void IMixedRealityPointerHandler.OnPointerUp(MixedRealityPointerEventData eventData)
     {
         // Requirement for implementing the interface
@@ -72,8 +75,11 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
 
             // let client know that a new drawing has been created
             Net_CreateMessage msg;
-            msg = new Net_CreateMessage(id, 0, 0);
+            // 0: red, 1: orange, 2: yellow, 3: green, 4: blue, 5: purple, 6: white, 7: black
+            Debug.Log(System.Array.IndexOf(colors, lineColor));
+            msg = new Net_CreateMessage(id, Array.IndexOf(colors, lineColor), 0);
             server.SendToClient(msg);
+
             Debug.Log(newLine.transform.position);
             drawLine = newLine.AddComponent<LineRenderer>();
             drawLine.material =  drawingMaterial;  //new Material (Shader.Find("Sprites/Default"));
