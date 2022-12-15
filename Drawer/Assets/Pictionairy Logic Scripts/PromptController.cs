@@ -52,6 +52,7 @@ public class PromptController : MonoBehaviour
             Random rand = new System.Random();
             int index = rand.Next(promptList.Length);
             textmeshPro.SetText(promptList[index]);
+            checkboxScript.setCheckboxHit(false);
 
         }
 

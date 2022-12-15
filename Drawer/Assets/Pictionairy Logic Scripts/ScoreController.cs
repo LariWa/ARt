@@ -33,7 +33,7 @@ public class ScoreController : MonoBehaviour
             TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
             currentScore++;
             textmeshPro.SetText(currentScore.ToString());
-            checkboxScript.setCheckboxHit(false);
+            //checkboxScript.setCheckboxHit(false);
         }
 
 
