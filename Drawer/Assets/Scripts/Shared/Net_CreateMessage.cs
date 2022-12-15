@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Networking.Transport;
-using UnityEngine.XR.ARFoundation.Samples;
+//using UnityEngine.XR.ARFoundation.Samples;
 //using static LineBehavior;
 
 public class Net_CreateMessage : NetMessage
