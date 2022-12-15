@@ -134,6 +134,9 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
         timer = timerdelay;
         drawingOrigin = GameObject.Find("drawingOrigin");
         server = FindObjectOfType<BaseServer>();
+        PointerUtils.SetMotionControllerRayPointerBehavior(PointerBehavior.AlwaysOff);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Right);
+        PointerUtils.SetHandRayPointerBehavior(PointerBehavior.AlwaysOff, Handedness.Left);
     }
 
 
