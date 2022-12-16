@@ -4,14 +4,13 @@ using Unity.Networking.Transport;
 public class Net_CreateMessage : NetMessage
 {
   public int entryId { set; get; }
-  public int color { set; get; }
-  public int brush { set; get; }
+  public float red { set; get; }
+  public float green { set; get; }
+  public float blue { set; get; }
+  public float width { set; get; }
 
   GameObject newLine;
   LineRenderer drawLine;
-  static Color orange =  new Color(1, 0.5f, 0, 1);
-  Color[] colors = new Color[] { Color.red, orange, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
-  string[] materials = { "Paint", "Highlight", "Paint" };
 
   public Net_CreateMessage()
   {
@@ -24,27 +23,33 @@ public class Net_CreateMessage : NetMessage
     Deserialize(reader);
   }
 
-  public Net_CreateMessage(int id, int c, int b)
+  public Net_CreateMessage(int id, float r, float g, float b, float w)
   {
     Code = OpCode.CREATE_MSG;
     entryId = id;
-    color = c;
-    brush = b;
+    red = r;
+    green = g;
+    blue = b;
+    width = w;
   }
 
   public override void Serialize(ref DataStreamWriter writer)
   {
     writer.WriteByte((byte)Code);
     writer.WriteInt(entryId);
-    writer.WriteInt(color);
-    writer.WriteInt(brush);
+    writer.WriteFloat(red);
+    writer.WriteFloat(green);
+    writer.WriteFloat(blue);
+    writer.WriteFloat(width);
   }
 
   public override void Deserialize(DataStreamReader reader)
   {
     entryId = reader.ReadInt();
-    color = reader.ReadInt();
-    brush = reader.ReadInt();
+    red = reader.ReadFloat();
+    green = reader.ReadFloat();
+    blue = reader.ReadFloat();
+    width = reader.ReadFloat();
   }
 
   public override void ReceivedOnServer()
@@ -67,12 +72,11 @@ public class Net_CreateMessage : NetMessage
       Material material = Resources.Load("Materials/Paint", typeof(Material)) as Material;
       drawLine.material = material;
       //drawLine.material = new Material (Shader.Find("Sprites/Default"));
-      drawLine.startColor = colors[color];
-      drawLine.endColor = colors[color];
+      drawLine.startColor = new Color(red, green, blue, 1);
+      drawLine.endColor = new Color (red, green, blue, 1);
 
-      float lineWidth = (brush != 0) ? 0.01f : 0.03f;
-      drawLine.startWidth = lineWidth;
-      drawLine.endWidth = lineWidth;
+      drawLine.startWidth = width;
+      drawLine.endWidth = width;
       drawLine.useWorldSpace = false;
 
     }
