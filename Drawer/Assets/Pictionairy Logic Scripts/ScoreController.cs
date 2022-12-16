@@ -5,15 +5,22 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private int currentScore = 0;
-
+    public int currentScore = 0;
+    public static ScoreController instance;
     public void resetScore(){
         currentScore = 0;
         TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
         textmeshPro.SetText(currentScore.ToString());
 
     }
+    public void Start()
+    {
+        TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
 
+        instance = this;
+        textmeshPro.SetText(currentScore.ToString());
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -23,22 +30,27 @@ public class ScoreController : MonoBehaviour
         bool isRunning = timerScript.getTimerIsRunning();
 
         GameObject checkbox = GameObject.Find("green checkbox");
-        CheckboxController checkboxScript = checkbox.GetComponent<CheckboxController>();
-        bool checkboxIsHit = checkboxScript.getCheckboxHit();
+      //  CheckboxController checkboxScript = checkbox.GetComponent<CheckboxController>();
+     //   bool checkboxIsHit = checkboxScript.getCheckboxHit();
 
 
         //increase the score
-        if (checkboxIsHit && isRunning)
-        {
-            TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
-            currentScore++;
-            textmeshPro.SetText(currentScore.ToString());
+        //if (checkboxIsHit && isRunning)
+        //{
+           
             //checkboxScript.setCheckboxHit(false);
         }
 
 
 
 
+    
+public void increaseScore()
+{
+        Debug.Log("increase Score");
+        TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
+        currentScore++;
+        textmeshPro.SetText(currentScore.ToString());
     }
 }
 

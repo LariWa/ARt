@@ -73,15 +73,15 @@ public class PromptController : MonoBehaviour
         TimerController timerScript = theTimer.GetComponent<TimerController>(); //get the timer script from the object
         bool isRunning = timerScript.getTimerIsRunning(); //see if the time is currently running
 
-        GameObject checkbox = GameObject.Find("green checkbox");
-        CheckboxController checkboxScript = checkbox.GetComponent<CheckboxController>();
-        bool checkboxIsHit = checkboxScript.getCheckboxHit();
+       // GameObject checkbox = GameObject.Find("green checkbox");
+       //// CheckboxController checkboxScript = checkbox.GetComponent<CheckboxController>();
+        //bool checkboxIsHit = checkboxScript.getCheckboxHit();
 
-        if (checkboxIsHit && isRunning)
-        {
+        //if (checkboxIsHit && isRunning)
+        //{
 
 
-        }
+        //}
 
         if (!isRunning)
         {
@@ -97,6 +97,7 @@ public class PromptController : MonoBehaviour
         Random rand = new System.Random();
         int index = rand.Next(promptList.Length);
         textmeshPro.SetText(promptList[index]);
+        ScoreController.instance.increaseScore();
         //checkboxScript.setCheckboxHit(false);
     }
 }
