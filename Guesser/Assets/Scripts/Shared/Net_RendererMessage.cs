@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Networking.Transport;
+using Math = System.Math;
 //using static LineBehavior;
 
 public class Net_RendererMessage : NetMessage
@@ -61,7 +62,8 @@ public class Net_RendererMessage : NetMessage
   {
       //Debug.Log("Entry " + count + ": " + posX + "/" + posY + "/" + posZ);
 
-      if (!(posX == 0 && posY == 0 && posZ == 0)) {
+      if (!(Math.Abs(posX) < 0.0001f && Math.Abs(posY) < 0.0001f && Math.Abs(posZ) < 0.0001f)) {
+        Debug.Log(posX + "/" + posY + "/" + posZ);
         GameObject line = GameObject.Find("Drawing " + entryId);
         LineRenderer drawLine = line.GetComponent(typeof(LineRenderer)) as LineRenderer;
         Debug.Log(count);
