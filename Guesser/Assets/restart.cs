@@ -24,4 +24,8 @@ public class restart : MonoBehaviour
             GameObject.Destroy(drawing);
         }
     }
+    public void correctGuess()
+    {
+        BaseClient.instance.SendToServer(new Net_MsgCode(actionTypeCode.CORRECTREPLY));
+    }
 }

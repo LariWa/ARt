@@ -12,4 +12,5 @@ public enum actionTypeCode
    EFFECT = 2,
    RESET = 3,
    ALIVE =4,
+   CORRECTREPLY=5,
 }

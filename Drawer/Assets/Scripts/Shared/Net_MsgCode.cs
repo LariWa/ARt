@@ -58,6 +58,10 @@ public class Net_MsgCode : NetMessage
             //pencil.transform.position = pencilPosition;
             //palette.transform.position = palettePosition;
         }
+        if (actionType == actionTypeCode.CORRECTREPLY)
+        {
+            PromptController.instance.correctGuess();
+        }
     }
     public override void ReceivedOnClient()
     {

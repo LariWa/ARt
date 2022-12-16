@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4fbaf4eed9f7aa34a853726320ed0128, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fbaf4eed9f7aa34a853726320ed0128, type: 3}
@@ -387,7 +387,7 @@ MonoBehaviour:
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
   enableConstraints: 1
-  constraintsManager: {fileID: 693369398}
+  constraintsManager: {fileID: 222517202}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -442,7 +442,7 @@ CapsuleCollider:
   m_Radius: 29.353428
   m_Height: 373.8931
   m_Direction: 0
-  m_Center: {x: -82.026306, y: 29.713234, z: -11.248874}
+  m_Center: {x: -69.8, y: 39.9, z: 0.8}
 --- !u!114 &222517205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,6 +1238,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 56.633
+      objectReference: {fileID: 0}
+    - target: {fileID: -5727097990904671972, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06656786
+      objectReference: {fileID: 0}
+    - target: {fileID: -5727097990904671972, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.16884112
+      objectReference: {fileID: 0}
+    - target: {fileID: -501930538830631127, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a7fadd47d17d4fefafa087101d0a6ca, type: 3}
       propertyPath: m_Name
@@ -2648,7 +2660,7 @@ MonoBehaviour:
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
   enableConstraints: 1
-  constraintsManager: {fileID: 693369398}
+  constraintsManager: {fileID: 1260890039}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -4232,10 +4244,34 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Size.x
+      value: 0.27614242
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Size.y
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Size.z
+      value: 0.43878722
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Center.x
+      value: -0.7180706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Center.y
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079699487060849819, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+      propertyPath: m_Center.z
+      value: -0.20529716
+      objectReference: {fileID: 0}
     - target: {fileID: 1079699487060849823, guid: d19916bb4119584f6930f8d00051f895, type: 3}
       propertyPath: constraintsManager
       value: 
-      objectReference: {fileID: 693369398}
+      objectReference: {fileID: 919132148549796361}
     - target: {fileID: 1079699487060850528, guid: d19916bb4119584f6930f8d00051f895, type: 3}
       propertyPath: m_Name
       value: Brush
@@ -4300,6 +4336,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409841147261660634, guid: d19916bb4119584f6930f8d00051f895, type: 3}
   m_PrefabInstance: {fileID: 160639916800030366}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &919132148549796361 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1079699487060849820, guid: d19916bb4119584f6930f8d00051f895, type: 3}
+  m_PrefabInstance: {fileID: 160639916800030366}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160639916800030367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &919132149243603611
 GameObject:
   m_ObjectHideFlags: 0
