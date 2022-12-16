@@ -73,6 +73,7 @@ public class RestartController : MonoBehaviour
             brush.transform.position = brushPosition;
             pencil.transform.position = pencilPosition;
             palette.transform.position = palettePosition;
+            BaseServer.instance.SendToClient(new Net_MsgCode(actionTypeCode.RESET));
         }
         
         Debug.Log("ontriggerExit called ");

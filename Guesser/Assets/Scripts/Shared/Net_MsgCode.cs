@@ -22,7 +22,7 @@ public class Net_MsgCode : NetMessage
 
     public override void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteInt((int)Code);
+        writer.WriteByte((byte)Code);
         writer.WriteByte((byte)actionType);
     }
     public override void Deserialize(DataStreamReader reader)
@@ -36,5 +36,16 @@ public class Net_MsgCode : NetMessage
     }
     public override void ReceivedOnClient()
     {
+        Debug.Log("msg");
+        Debug.Log(actionType);
+        if (actionType == actionTypeCode.RESET)
+        {
+            Debug.Log("reset");
+            var drawings = GameObject.FindGameObjectsWithTag("drawing");
+            foreach(GameObject drawing in drawings)
+            {
+                GameObject.Destroy(drawing);
+            }
+        }
     }
 }
