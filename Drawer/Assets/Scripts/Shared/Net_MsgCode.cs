@@ -32,7 +32,32 @@ public class Net_MsgCode : NetMessage
 
     public override void ReceivedOnServer()
     {
+        if (actionType == actionTypeCode.RESET)
+        {
 
+            Debug.Log(("restart"));
+            GameObject theTimer = GameObject.Find("Timer");
+            TimerController timerScript = theTimer.GetComponent<TimerController>(); //get the timer script from the object
+            timerScript.setTimeRemaining(120.0f);
+            timerScript.setIsRunning(true);
+
+            GameObject theScore = GameObject.Find("Score");
+            ScoreController scoreScript = theScore.GetComponent<ScoreController>();
+            scoreScript.resetScore();
+
+            //erase drawings
+            var drawings = GameObject.FindGameObjectsWithTag("drawing");
+            foreach (GameObject drawing in drawings)
+            {
+                GameObject.Destroy(drawing);
+            }
+            ////reposition objects
+            //eraser.transform.position = eraserPosition;
+            //highlighter.transform.position = highlighterPosition;
+            //brush.transform.position = brushPosition;
+            //pencil.transform.position = pencilPosition;
+            //palette.transform.position = palettePosition;
+        }
     }
     public override void ReceivedOnClient()
     {

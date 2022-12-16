@@ -41,11 +41,7 @@ public class Net_MsgCode : NetMessage
         if (actionType == actionTypeCode.RESET)
         {
             Debug.Log("reset");
-            var drawings = GameObject.FindGameObjectsWithTag("drawing");
-            foreach(GameObject drawing in drawings)
-            {
-                GameObject.Destroy(drawing);
-            }
+           
         }
     }
 }

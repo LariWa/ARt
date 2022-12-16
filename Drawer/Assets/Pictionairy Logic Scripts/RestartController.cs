@@ -52,28 +52,28 @@ public class RestartController : MonoBehaviour
     {
         stuffInBox --;
         if(stuffInBox == 0){
-            GameObject theTimer = GameObject.Find("Timer");
-            TimerController timerScript = theTimer.GetComponent<TimerController>(); //get the timer script from the object
-            timerScript.setTimeRemaining(120.0f);
-            timerScript.setIsRunning(true);
+            //GameObject theTimer = GameObject.Find("Timer");
+            //TimerController timerScript = theTimer.GetComponent<TimerController>(); //get the timer script from the object
+            //timerScript.setTimeRemaining(120.0f);
+            //timerScript.setIsRunning(true);
 
-            GameObject theScore = GameObject.Find("Score");
-            ScoreController scoreScript = theScore.GetComponent<ScoreController>();
-            scoreScript.resetScore();
+            //GameObject theScore = GameObject.Find("Score");
+            //ScoreController scoreScript = theScore.GetComponent<ScoreController>();
+            //scoreScript.resetScore();
 
-            //erase drawings
-            var drawings = GameObject.FindGameObjectsWithTag("drawing");
-            foreach (GameObject drawing in drawings)
-            {
-                Destroy(drawing);
-            }
-            //reposition objects
-            eraser.transform.position = eraserPosition;
-            highlighter.transform.position = highlighterPosition;
-            brush.transform.position = brushPosition;
-            pencil.transform.position = pencilPosition;
-            palette.transform.position = palettePosition;
-            BaseServer.instance.SendToClient(new Net_MsgCode(actionTypeCode.RESET));
+            ////erase drawings
+            //var drawings = GameObject.FindGameObjectsWithTag("drawing");
+            //foreach (GameObject drawing in drawings)
+            //{
+            //    Destroy(drawing);
+            //}
+            ////reposition objects
+            //eraser.transform.position = eraserPosition;
+            //highlighter.transform.position = highlighterPosition;
+            //brush.transform.position = brushPosition;
+            //pencil.transform.position = pencilPosition;
+            //palette.transform.position = palettePosition;
+            //BaseServer.instance.SendToClient(new Net_MsgCode(actionTypeCode.RESET));
         }
         
         Debug.Log("ontriggerExit called ");
