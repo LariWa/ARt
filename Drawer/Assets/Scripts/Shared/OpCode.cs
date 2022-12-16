@@ -10,5 +10,7 @@ public enum actionTypeCode
 {
    ERASE = 1,
    EFFECT = 2,
-   RESET = 3
+   RESET = 3,
+   ALIVE = 4,
+
 }
