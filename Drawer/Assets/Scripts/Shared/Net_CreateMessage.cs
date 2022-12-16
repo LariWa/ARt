@@ -9,7 +9,6 @@ public class Net_CreateMessage : NetMessage
 
   GameObject newLine;
   LineRenderer drawLine;
-  float lineWidth = 0.01f;
   static Color orange =  new Color(1, 0.5f, 0, 1);
   Color[] colors = new Color[] { Color.red, orange, Color.yellow, Color.green, Color.blue, Color.magenta, Color.white, Color.black };
   string[] materials = { "Paint", "Highlight", "Paint" };
@@ -65,12 +64,14 @@ public class Net_CreateMessage : NetMessage
       drawLine = newLine.AddComponent<LineRenderer>();
       drawLine.positionCount--;
 
-      //Material material = (Material)Resources.Load(materials[brush], typeof(Material));
-      //drawLine.material = material;
-      drawLine.material = new Material (Shader.Find("Sprites/Default"));
+      Material material = Resources.Load("Materials/Paint", typeof(Material)) as Material;
+      drawLine.material = material;
+      //drawLine.material = new Material (Shader.Find("Sprites/Default"));
       drawLine.startColor = colors[color];
       drawLine.endColor = colors[color];
-      drawLine.startWidth = lineWidth; // replace with brush
+
+      float lineWidth = (brush != 0) ? 0.01f : 0.03f;
+      drawLine.startWidth = lineWidth;
       drawLine.endWidth = lineWidth;
       drawLine.useWorldSpace = false;
 

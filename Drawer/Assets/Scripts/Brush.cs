@@ -17,6 +17,7 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     System.DateTime previousDrawingTime;
     System.DateTime currentDrawingTime = System.DateTime.Now;
     public float timerdelay;
+    public int id;
 
     public Color lineColor = Color.red;
     static Color orange =  new Color(1, 0.5f, 0, 1);
@@ -33,7 +34,6 @@ public class Brush : MonoBehaviour, IMixedRealityPointerHandler
     private MixedRealityInputAction grabAction = MixedRealityInputAction.None;
 
     private BaseServer server;
-    private int id = -1;
 
 
 
